@@ -69,6 +69,7 @@ require('../src/styles/styles.css')
 import Quota from '@/components/Quota'
 import TotalCount from '@/components/TotalCount'
 import LeaveUpdate from '@/components/LeaveUpdate'
+import axios from 'axios'
 export default {
   name: 'app',
   components: {
@@ -90,6 +91,7 @@ export default {
   },
   methods:{
     onClickShowQuota() {
+    var vm = this
     if(this.fromDate != null && this.toDate != null){
       // this.parentString =  new DatePipe('en-US').transform (this.fromDate,'EEEE, MMMM d, y')+ "  to  " + new DatePipe('en-US').transform (this.toDate,'EEEE, MMMM d, y');
       this.parentString =  this.fromDate + "  to  " + this.toDate;
@@ -98,10 +100,18 @@ export default {
       var toDate = new Date(this.toDate).getTime();
       var fromDate = new Date(this.fromDate).getTime();
       var duration = (Math.floor((toDate - fromDate))/(1000*60*60*24));
-      this.leavequota = Math.abs(duration);
-      console.log('leavequota --- '+duration);
-      console.log(this);
+      // this.leavequota = Math.abs(duration);
+      // console.log('leavequota --- '+duration);
+      // console.log(this);
     // this.ngRedux.dispatch({type: ADD_QUOTA, nikState: this});
+    axios({
+      url:'http://localhost:3001/posts',
+      method:'get'
+    }).then(function(value){
+      console.log(value);
+      vm.leavequota = value.data[0].id;
+    })
+    console.log('calling axios')
   },
   onClickHideQuota() {
     this.showQuotaPanel = false;
