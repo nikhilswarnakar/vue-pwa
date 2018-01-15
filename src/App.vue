@@ -105,11 +105,11 @@ export default {
       // console.log(this);
     // this.ngRedux.dispatch({type: ADD_QUOTA, nikState: this});
     axios({
-      url:'http://localhost:3001/posts',
+      url:'http://localhost:3000/leaves',
       method:'get'
-    }).then(function(value){
-      console.log(value);
-      vm.leavequota = value.data[0].id;
+    }).then(function(result){
+      console.log(result);
+      vm.leavequota = result.data[0].quota;
     })
     console.log('calling axios')
   },
