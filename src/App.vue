@@ -94,9 +94,9 @@ export default {
     var vm = this
     if(this.fromDate != null && this.toDate != null){
       // this.parentString =  new DatePipe('en-US').transform (this.fromDate,'EEEE, MMMM d, y')+ "  to  " + new DatePipe('en-US').transform (this.toDate,'EEEE, MMMM d, y');
-      this.parentString =  this.fromDate + "  to  " + this.toDate;
+      this.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
       this.showQuotaPanel = true;
-      }
+      
       var toDate = new Date(this.toDate).getTime();
       var fromDate = new Date(this.fromDate).getTime();
       var duration = (Math.floor((toDate - fromDate))/(1000*60*60*24));
@@ -109,9 +109,10 @@ export default {
       method:'get'
     }).then(function(result){
       console.log(result);
-      vm.leavequota = result.data[0].quota;
+      vm.leavequota = result.data[0].availableQuota;
     })
     console.log('calling axios')
+    }
   },
   onClickHideQuota() {
     this.showQuotaPanel = false;

@@ -47,7 +47,7 @@ export default {
         onClickCreateBid() {
             console.log("Bid Request Submitted");
             this.$parent.count+=1;
-            this.$parent.lastSubmitDate = new Date();
+            this.$parent.lastSubmitDate = new Date().toLocaleString("en-US");
         }
     },
     created(){
