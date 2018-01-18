@@ -11,6 +11,7 @@
 <br/>
 <leave-update></leave-update>
 <!-- <total-count :myCount="count" @countUpdated="updateCount"></total-count> -->
+
 <total-count :myCount="count"></total-count>
 </div>
 <div class="container">
@@ -80,22 +81,51 @@ export default {
   data(){
     return {
       title:'app',
-       fromDate: null,
+      fromDate: null,
       toDate: null,
-      parentString: "",
-      showQuotaPanel: false,
-      lastSubmitDate: null,
-      count: 0,
-      leavequota: 0
+      //parentString: "",
+      //showQuotaPanel: false,
+      //lastSubmitDate: null,
+      //count: 0,
+      //leavequota: 0,
+      model : {
+        fromDate: null,
+        toDate: null,
+        parentString: "",
+        showQuotaPanel: false,
+        lastSubmitDate: null,      
+        count: 0,
+        leavequota: 0
+      }
     }
   },
   methods:{
+    callDispatch(result) {
+      console.log("callDispatch called")
+      console.log(result);
+      console.log(this.model);
+
+      this.model.leavequota = result.data[0].availableQuota;
+      if(this.model.leavequota === 0) {
+        this.model.leavequota = 15;
+      }
+      this.$store.dispatch('showquota',this.model);
+
+    },
     onClickShowQuota() {
     var vm = this
     if(this.fromDate != null && this.toDate != null){
       // this.parentString =  new DatePipe('en-US').transform (this.fromDate,'EEEE, MMMM d, y')+ "  to  " + new DatePipe('en-US').transform (this.toDate,'EEEE, MMMM d, y');
-      this.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
-      this.showQuotaPanel = true;
+      // this.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
+      // this.showQuotaPanel = true;
+
+      //nik code
+      this.model.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
+      console.log(this.model.parentString);
+      this.model.showQuotaPanel = true;
+
+      this.model.fromDate = this.fromDate;
+      this.model.toDate = this.toDate;
       
       var toDate = new Date(this.toDate).getTime();
       var fromDate = new Date(this.fromDate).getTime();
@@ -108,16 +138,19 @@ export default {
       url:'http://localhost:3000/leaves',
       method:'get'
     }).then(function(result){
+      console.log('calling axios');
       console.log(result);
-      vm.leavequota = result.data[0].availableQuota;
+      //vm.leavequota = result.data[0].availableQuota;
+      vm.callDispatch(result);
     })
-    console.log('calling axios')
+    
     }
   },
   onClickHideQuota() {
-    this.showQuotaPanel = false;
-    console.log(this);
+    // this.showQuotaPanel = false;
+    // console.log(this);
     // this.ngRedux.dispatch({type: HIDE_QUOTA, nikState: this});
+    this.$store.dispatch('cancelquota');
   },
   // updateCount(newCount){
   //   this.count += newCount

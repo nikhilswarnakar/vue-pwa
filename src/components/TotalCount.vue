@@ -4,7 +4,7 @@
   <p class="text-center"><span span class="badge badge-secondary">
     <!-- Total Leave Request Submitted : {{ count}} -->
     <!-- <br> -->
-    Total Leave Request Submitted : {{ myCount}}
+    Total Leave Request Submitted : {{ count }}
     <!-- <br> -->
     <!-- Total Leave Request Submitted : {{ myComputedProp}} -->
   </span></p>
@@ -14,6 +14,11 @@
 <script>
 export default {
   props:['myCount'],
+  computed: {
+     count: function() {
+       return this.$store.getters.count;
+     }     
+   },
   beforeUpdate(){
       console.log('total count updated')
   }
