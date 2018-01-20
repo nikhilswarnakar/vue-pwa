@@ -105,7 +105,7 @@ export default {
       console.log(result);
       console.log(this.model);
 
-      this.model.leavequota = result.data[0].availableQuota;
+      this.model.leavequota = result;
       if(this.model.leavequota === 0) {
         this.model.leavequota = 15;
       }
@@ -141,7 +141,10 @@ export default {
       console.log('calling axios');
       console.log(result);
       //vm.leavequota = result.data[0].availableQuota;
-      vm.callDispatch(result);
+      vm.callDispatch(result.data[0].availableQuota);
+    }).catch(function(err){
+      console.log(err)
+      vm.callDispatch(-1);
     })
     
     }
