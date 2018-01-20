@@ -27,7 +27,7 @@
                 <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 form-group'>
                     <label htmlFor='fromDate'>From</label><span >*</span>
                     <!-- <input type='date' class='form-control'  [(ngModel)]="model.fromDate"  (blur) ="showdateinfo()" /> -->
-                    <input type='date' class='form-control'  v-model="fromDate"   />
+                    <input type='date' class='form-control'  v-model="model.fromDate"   />
                 </div>
                 <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 form-group' align='center'>
                     <br/>
@@ -36,7 +36,7 @@
                 <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 form-group'>
                     <label htmlFor='toDate'>To</label>
                     <!-- <input type='date' class='form-control'  [(ngModel)]="model.toDate"   /> -->
-                    <input type='date' class='form-control'  v-model="toDate"   />
+                    <input type='date' class='form-control'  v-model="model.toDate"   />
                 </div>
                 <div class='btn-toolbar pull-right ' >
                     <button type='button' class='btn btn-default' @click=" onClickHideQuota"  > Cancel </button>
@@ -114,21 +114,21 @@ export default {
     },
     onClickShowQuota() {
     var vm = this
-    if(this.fromDate != null && this.toDate != null){
-      // this.parentString =  new DatePipe('en-US').transform (this.fromDate,'EEEE, MMMM d, y')+ "  to  " + new DatePipe('en-US').transform (this.toDate,'EEEE, MMMM d, y');
-      // this.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
+    if(this.model.fromDate != null && this.model.toDate != null){
+      // this.parentString =  new DatePipe('en-US').transform (this.model.fromDate,'EEEE, MMMM d, y')+ "  to  " + new DatePipe('en-US').transform (this.model.toDate,'EEEE, MMMM d, y');
+      // this.parentString =  new Date(this.model.fromDate).toDateString() + "  to  " + new Date(this.model.toDate).toDateString();
       // this.showQuotaPanel = true;
 
       //nik code
-      this.model.parentString =  new Date(this.fromDate).toDateString() + "  to  " + new Date(this.toDate).toDateString();
+      this.model.parentString =  new Date(this.model.fromDate).toDateString() + "  to  " + new Date(this.model.toDate).toDateString();
       console.log(this.model.parentString);
       this.model.showQuotaPanel = true;
 
-      this.model.fromDate = this.fromDate;
-      this.model.toDate = this.toDate;
+      this.model.fromDate = this.model.fromDate;
+      this.model.toDate = this.model.toDate;
       
-      var toDate = new Date(this.toDate).getTime();
-      var fromDate = new Date(this.fromDate).getTime();
+      var toDate = new Date(this.model.toDate).getTime();
+      var fromDate = new Date(this.model.fromDate).getTime();
       var duration = (Math.floor((toDate - fromDate))/(1000*60*60*24));
       // this.leavequota = Math.abs(duration);
       // console.log('leavequota --- '+duration);
