@@ -34,7 +34,7 @@
                     -
                 </div>
                 <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 form-group'>
-                    <label htmlFor='toDate'>To</label>
+                    <label htmlFor='toDate'>To</label><span >*</span>
                     <!-- <input type='date' class='form-control'  [(ngModel)]="model.toDate"   /> -->
                     <input type='date' class='form-control'  v-model="model.toDate"   />
                 </div>
@@ -57,11 +57,8 @@
      
      <quota></quota>
     
-</div>	
-
-
-
-  </div>
+</div>
+</div>
 </template>
 
 <script>
@@ -80,7 +77,7 @@ export default {
   },
   data(){
     return {
-      title:'app',
+      title:'App',
       fromDate: null,
       toDate: null,
       //parentString: "",
