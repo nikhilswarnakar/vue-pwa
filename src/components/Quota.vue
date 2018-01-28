@@ -64,10 +64,10 @@ export default {
         }
     },
     created(){
-        console.log('quota created')
+        console.log('Quota created')
     },
     mounted(){
-        console.log('quota mounted')
+        console.log('Quota mounted')
     },
     beforeDestroy(){
         console.log('quota destroyed')

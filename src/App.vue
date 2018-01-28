@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="appclass">
     <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
@@ -155,7 +155,13 @@ export default {
   // updateCount(newCount){
   //   this.count += newCount
   // }
-  }
+  },
+  created(){
+        console.log('App created')
+    },
+    mounted(){
+        console.log('App mounted')
+    }
 }
 </script>
 
