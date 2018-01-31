@@ -13,7 +13,8 @@ export default new Vuex.Store({
         showQuotaPanel: false,
         lastSubmitDate: null,      
         count: 0,
-        leavequota: 0
+        leavequota: 0,
+        submitmsg:""
     },
     getters: {
         //TODO: implement
@@ -37,22 +38,22 @@ export default new Vuex.Store({
         },
         leavequota: function(state) {
             return state.leavequota;
+        },
+        submitmsg: function(state) {
+            return state.submitmsg;
         }
 
     },
     mutations: {
         //TODO: implement
-        showquota: function(state,payload) {
-                      
+        showquota: function(state,payload) {                      
 
             state.fromDate = payload.fromDate;
             state.toDate = payload.toDate;
             state.parentString = payload.parentString;
-            state.showQuotaPanel = payload.showQuotaPanel;
-            
+            state.showQuotaPanel = payload.showQuotaPanel;            
             state.leavequota = payload.leavequota;
-
-            
+            state.submitmsg = payload.submitmsg;            
         },
         cancelquota: function(state) {
             

@@ -92,7 +92,8 @@ export default {
         showQuotaPanel: false,
         lastSubmitDate: null,      
         count: 0,
-        leavequota: 0
+        leavequota: 0,
+        submitmsg: ""
       }
     }
   },
@@ -102,9 +103,14 @@ export default {
       console.log(result);
       console.log(this.model);
 
-      this.model.leavequota = result;
+      //this.model.leavequota = result;
+      this.model.leavequota = result.data[0].availableQuota;
+      this.model.submitmsg = result.data[0].description;
       if(this.model.leavequota === 0) {
-        this.model.leavequota = 15;
+        this.model.leavequota = 10;
+      }
+      if(this.model.submitmsg === "") {
+        this.model.submitmsg = "Leave Bid Request Successfuly Submitted.";
       }
       this.$store.dispatch('showquota',this.model);
 
@@ -138,10 +144,10 @@ export default {
       console.log('calling axios');
       console.log(result);
       //vm.leavequota = result.data[0].availableQuota;
-      vm.callDispatch(result.data[0].availableQuota);
+      vm.callDispatch(result);
     }).catch(function(err){
       console.log(err)
-      vm.callDispatch(-1);
+      //vm.callDispatch(-1);
     })
     
     }
