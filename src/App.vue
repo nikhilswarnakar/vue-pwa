@@ -39,8 +39,8 @@
                     <input type='date' class='form-control'  v-model="model.toDate"   />
                 </div>
                 <div class='btn-toolbar pull-right ' >
-                    <button type='button' class='btn btn-default' @click=" onClickHideQuota"  > Cancel </button>
-                    <button type='button' class='btn btn-primary' @click=" onClickShowQuota"> Show Quota </button>
+                    <button id="cancelbtn" type='button' class='btn btn-default' @click=" onClickHideQuota"  > Cancel </button>
+                    <button id="showquotabtn" type='button' class='btn btn-primary' @click=" onClickShowQuota"> Show Quota </button>
                 </div>
 
         </div>
@@ -153,6 +153,8 @@ export default {
     })
     */
     this.$store.dispatch('showquota',this.model);
+    } else {
+      window.alert("Please select From and To Date");
     }
   },
   onClickHideQuota() {
