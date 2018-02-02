@@ -27,7 +27,7 @@
                 <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 form-group'>
                     <label htmlFor='fromDate'>From</label><span >*</span>
                     <!-- <input type='date' class='form-control'  [(ngModel)]="model.fromDate"  (blur) ="showdateinfo()" /> -->
-                    <input type='date' class='form-control'  v-model="model.fromDate"   />
+                    <input type='date' class='form-control'  @change="datechecker" v-model="model.fromDate" />
                 </div>
                 <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2 form-group' align='center'>
                     <br/>
@@ -36,11 +36,11 @@
                 <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5 form-group'>
                     <label htmlFor='toDate'>To</label><span >*</span>
                     <!-- <input type='date' class='form-control'  [(ngModel)]="model.toDate"   /> -->
-                    <input type='date' class='form-control'  v-model="model.toDate"   />
+                    <input type='date' class='form-control'  @change="datechecker" v-model="model.toDate" />
                 </div>
                 <div class='btn-toolbar pull-right ' >
                     <button id="cancelbtn" type='button' class='btn btn-default' @click=" onClickHideQuota"  > Cancel </button>
-                    <button id="showquotabtn" type='button' class='btn btn-primary' @click=" onClickShowQuota"> Show Quota </button>
+                    <button id="showquotabtn" type='button' class='btn btn-primary' @click=" onClickShowQuota" disabled> Show Quota </button>
                 </div>
 
         </div>
@@ -68,6 +68,8 @@ import Quota from '@/components/Quota'
 import TotalCount from '@/components/TotalCount'
 import LeaveUpdate from '@/components/LeaveUpdate'
 import axios from 'axios'
+
+
 export default {
   name: 'app',
   components: {
@@ -163,6 +165,21 @@ export default {
     // this.ngRedux.dispatch({type: HIDE_QUOTA, nikState: this});
     this.$store.dispatch('cancelquota');
   },
+  datechecker()  {
+    console.log("datechecker called");
+    if(this.model.fromDate != null && this.model.toDate != null){
+      var from = new Date(this.model.fromDate);
+      var to = new Date(this.model.toDate);
+      if(to > from)
+      {
+        document.getElementById("showquotabtn").disabled = false;
+      }else{
+        document.getElementById("showquotabtn").disabled = true;
+         window.alert('To Date should be greater than from date !!');
+      }
+      
+    }
+  }
   // updateCount(newCount){
   //   this.count += newCount
   // }
