@@ -137,6 +137,8 @@ export default {
       // console.log('leavequota --- '+duration);
       // console.log(this);
     // this.ngRedux.dispatch({type: ADD_QUOTA, nikState: this});
+
+    /*
     axios({
       url:'http://localhost:3000/leaves',
       method:'get'
@@ -149,7 +151,8 @@ export default {
       console.log(err)
       //vm.callDispatch(-1);
     })
-    
+    */
+    this.$store.dispatch('showquota',this.model);
     }
   },
   onClickHideQuota() {

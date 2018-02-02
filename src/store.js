@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -69,7 +70,24 @@ export default new Vuex.Store({
     actions: {
         //TODO: implement
         showquota: function(context,payload) {
-            context.commit('showquota',payload);
+            axios({
+                url:'http://localhost:3000/leaves',
+                method:'get'
+              }).then(function(result){
+                console.log('calling axios from vuex');
+                console.log(result);
+                
+                payload.leavequota = result.data[0].availableQuota;
+                payload.submitmsg = result.data[0].description;
+                console.log('Payload after axios call: ');
+                console.log(payload);                
+                context.commit('showquota',payload);
+                //vm.leavequota = result.data[0].availableQuota;
+                //vm.callDispatch(result);
+              }).catch(function(err){
+                console.log(err)
+                //vm.callDispatch(-1);
+              })            
         },
         cancelquota: function(context) {
             context.commit('cancelquota');
