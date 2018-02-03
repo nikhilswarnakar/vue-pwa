@@ -11,8 +11,8 @@
 <br/>
 <leave-update></leave-update>
 <!-- <total-count :myCount="count" @countUpdated="updateCount"></total-count> -->
-
-<total-count :myCount="count"></total-count>
+<!-- <total-count :myCount="count"></total-count> -->
+<total-count></total-count>
 </div>
 <div class="container">
     <div>	
@@ -53,9 +53,29 @@
     <div *ngIf="(showQuotaPanel | async)" >
     <app-quota></app-quota>
     </div>
-     -->
-     
+     -->     
      <quota></quota>
+
+  <!-- modal window -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Warning!</h4>
+        </div>
+        <div class="modal-body">          
+          <p>To date should be greater than From date.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class='btn btn-primary' data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
     
 </div>
 </div>
@@ -163,6 +183,9 @@ export default {
     // this.showQuotaPanel = false;
     // console.log(this);
     // this.ngRedux.dispatch({type: HIDE_QUOTA, nikState: this});
+    this.model.fromDate=null;
+    this.model.toDate=null;
+    this.datechecker();
     this.$store.dispatch('cancelquota');
   },
   datechecker()  {
@@ -175,9 +198,16 @@ export default {
         document.getElementById("showquotabtn").disabled = false;
       }else{
         document.getElementById("showquotabtn").disabled = true;
-         window.alert('To Date should be greater than from date !!');
+         //window.alert('To Date should be greater than from date !!');
+         // Get the modal
+         //var modal = document.getElementById('myModal1');
+        //  modal.style.display = "block";
+        $("#myModal1").modal();
       }
       
+    }
+    else{
+      document.getElementById("showquotabtn").disabled = true;
     }
   }
   // updateCount(newCount){
