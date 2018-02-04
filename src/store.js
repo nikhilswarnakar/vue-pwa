@@ -85,8 +85,11 @@ export default new Vuex.Store({
                 //vm.leavequota = result.data[0].availableQuota;
                 //vm.callDispatch(result);
               }).catch(function(err){
-                console.log(err)
-                //vm.callDispatch(-1);
+                console.log("axios call cannot be completed");
+                console.log(err);
+                payload.leavequota=7;
+                payload.submitmsg="Thanks for submitting your Leave Bid Request.";
+                context.commit('showquota',payload);
               })            
         },
         cancelquota: function(context) {
