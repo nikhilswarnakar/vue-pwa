@@ -71,14 +71,15 @@ export default new Vuex.Store({
         //TODO: implement
         showquota: function(context,payload) {
             axios({
-                url:'http://localhost:3000/leaves',
+                url:'https://vast-meadow-42149.herokuapp.com/crew/leave/quota', // http://localhost:3000/leaves
                 method:'get'
               }).then(function(result){
                 console.log('calling axios from vuex');
                 console.log(result);
-                
-                payload.leavequota = result.data[0].availableQuota;
-                payload.submitmsg = result.data[0].description;
+                payload.leavequota = result.data.availableQuota;
+                payload.submitmsg = result.data.description;                
+                // payload.leavequota = result.data[0].availableQuota;
+                // payload.submitmsg = result.data[0].description;
                 console.log('Payload after axios call: ');
                 console.log(payload);                
                 context.commit('showquota',payload);
@@ -88,7 +89,7 @@ export default new Vuex.Store({
                 console.log("axios call cannot be completed");
                 console.log(err);
                 payload.leavequota=7;
-                payload.submitmsg="Thanks for submitting your Leave Bid Request.";
+                payload.submitmsg="Thanks for submitting your request. We will try to accomdate your leave request and inform you at the earliest";
                 context.commit('showquota',payload);
               })            
         },

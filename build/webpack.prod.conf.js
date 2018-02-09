@@ -112,7 +112,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       runtimeCaching: [
         {
           urlPattern: /(.)*/,
-          handler: 'cacheFirst' //'networkFirst'
+          handler: 'cacheFirst' //'networkFirst' //cacheFirst //fastest
         }
       ]
     })

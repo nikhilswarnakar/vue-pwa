@@ -1,5 +1,5 @@
 <template>
-  <div v-show="count > 0">
+  <div v-if="count > 0">
 <p class="text-center"><span span class="badge badge-secondary">
   Last Leave Request Successfully Submitted on {{ lastSubmitDate }}
 </span></p>

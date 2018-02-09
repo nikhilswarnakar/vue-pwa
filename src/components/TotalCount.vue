@@ -1,5 +1,5 @@
 <template>
-  <div class="totalcount">
+  <div class="totalcount" v-if="count > 0">
     <!-- <p @click="incrementCount" class="text-center"><span span class="badge badge-secondary"> -->
   <p class="text-center"><span span class="badge badge-secondary">
     <!-- Total Leave Request Submitted : {{ count}} -->

@@ -84,18 +84,21 @@
 <script>
 require('crewmodules-design-system/dist/css/crewmodules-design-system.css')
 require('../src/styles/styles.css')
-import Quota from '@/components/Quota'
-import TotalCount from '@/components/TotalCount'
-import LeaveUpdate from '@/components/LeaveUpdate'
+// import Quota from '@/components/Quota'
+// import TotalCount from '@/components/TotalCount'
+// import LeaveUpdate from '@/components/LeaveUpdate'
 import axios from 'axios'
 
 
 export default {
   name: 'app',
   components: {
-    'quota':Quota,
-    'total-count':TotalCount,
-    'leave-update':LeaveUpdate
+    // 'quota':Quota,
+    // 'total-count':TotalCount,
+    // 'leave-update':LeaveUpdate
+    'quota': ()=>import('./components/Quota'),
+    'total-count':()=>import('./components/TotalCount'),
+    'leave-update':()=>import('./components/LeaveUpdate')
   },
   data(){
     return {
